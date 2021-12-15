@@ -1,0 +1,8 @@
+type Query {
+  userList(id:Int): [Name] 
+}
+
+type Name {
+  firstName:String
+  lastName:String
+}
