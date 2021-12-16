@@ -1,8 +1,13 @@
 type Query {
-  userList(id:Int): [Name] 
+  getUser(id:Int): UserResponse
 }
 
-type Name {
-  firstName:String
-  lastName:String
+type UserResponse implements Response {
+  data:User
+}
+
+type User {
+  id:Int
+  name:String
+  email:String
 }

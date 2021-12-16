@@ -1,6 +1,10 @@
+const { user, userList } = require('../controllers/users.controller')
 module.exports = {
-    Query: {
-      userList:(_,{ id }) => [{firstName:'0' , lastName:'lastname'},{firstName:'1' , lastName:'lastname'},{firstName:'2' , lastName:'lastname'}]
-    }
-  };
-  
+  Query: {
+    user,
+    userList
+  },
+  Mutation: {
+    
+  }
+}

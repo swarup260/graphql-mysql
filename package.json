@@ -4,17 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "lint": "eslint --fix-dry-run ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@graphql-tools/load-files": "^6.5.2",
+    "dotenv": "^10.0.0",
     "graphql-tools": "^8.2.0",
-    "graphql-yoga": "^1.18.3"
+    "graphql-yoga": "^1.18.3",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.95.14",
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
+    "eslint": "^8.4.1",
     "nodemon": "^2.0.15"
   }
 }

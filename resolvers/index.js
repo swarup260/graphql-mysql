@@ -7,4 +7,4 @@ const { loadFilesSync } = require('@graphql-tools/load-files')
 
 /*  AUTOMATED APPROACH: Put your resolvers anywhere 
     with ".resolvers.[js/ts]" naming convention */
-module.exports = resolvers = loadFilesSync(path.join(__dirname, './**/*.resolvers.*'))
+module.exports = loadFilesSync(path.join(__dirname, './**/*.resolvers.*'))
