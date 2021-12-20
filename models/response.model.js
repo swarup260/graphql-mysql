@@ -1,13 +1,15 @@
-
-module.exports = class Response {
-    constructor() {
+class Response {
+    
+    initialObject(){
         this.responseObject = {
             status: true,
             code: 100,
             message: 'Success',
             data: [],
         }
+        return this
     }
+
     /**
      * 
      * @param {Boolean} status 
@@ -29,7 +31,7 @@ module.exports = class Response {
      * @param {String} message 
      * @returns 
      */
-    setSuccessMesage(message) {
+    setMessage(message) {
         this.responseObject.message = message
         return this
     }
@@ -37,7 +39,7 @@ module.exports = class Response {
      * 
      * @returns String
      */
-    getSuccessMesage() {
+    getMessage() {
         return this.responseObject.message
     }
     /**
@@ -99,5 +101,13 @@ module.exports = class Response {
         return this.responseObject
     }
 
+    setCustomValue(key,val){
+        this.responseObject[key] = val
+        return this
+    }
+
 
 }
+
+
+module.exports = new Response()

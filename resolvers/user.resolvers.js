@@ -1,10 +1,10 @@
-const { user, userList } = require('../controllers/users.controller')
+const { getUser,register,login } = require('../controllers/users.controller')
 module.exports = {
   Query: {
-    user,
-    userList
+    getUser
   },
-  Mutation: {
-    
+  Mutation:{
+    register,
+    login
   }
 }

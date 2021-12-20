@@ -7,9 +7,23 @@ const resolvers = require('./resolvers')
 const PORT = process.env.PORT || 3000
 const options = { port: PORT }
 
+/* middleware */
+const checkAuth = require('./middlewares/checkauth.middleware')
+
+const permissions = {
+  Query: {
+    secured: checkAuth,
+  },
+  getUser: checkAuth,
+}
+
+
+
 const server = new GraphQLServer({
   typeDefs,
   resolvers,
+  context: req => ({ ...req }),
+  middleware: [permissions],
 })
 
 /* SERVER STARTING */

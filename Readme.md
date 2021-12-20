@@ -1,6 +1,6 @@
 https://knexjs.org/#Migrations
 npm install knex -g
-
+<!-- table.integer('user_id').unique({indexName:'user_unqiue_id', deferrable:'immediate'}) -->
 knex migrate:make migration_name // create migration
 
 knex migrate:latest 

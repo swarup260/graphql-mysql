@@ -1,5 +1,0 @@
-type Response {
-    status:Boolean
-    code:Int
-    message:String
-}

@@ -1,22 +1,17 @@
-const jwt = require('jsonwebtoken');
-// config
-require('../utils/config')
-const {
-    userExists
-} = require('../helpers/function.helper');
+const ValidationError = require('../errors/validation.error');
+const { verifyToken,userExists } = require('../utils/helpers')
 
-module.exports = async (request, response, next) => {
+// eslint-disable-next-line no-unused-vars
+module.exports = async (resolve, parent, args, ctx, info) => {
     try {
-        const token = await request.headers.authorization.split(" ")[1]
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        console.log(ctx);
+        const token =  ctx.request.get('Authorization').split(" ")[1]
+        const decoded = verifyToken(token);
         const user = await userExists(decoded);
-        request.userData = user;
-        next();
+        ctx.request.set('userData',user)
+        resolve();
     } catch (error) {
-        return response.status(401).json({
-            status: false,
-            message: 'Unauthorised Access'
-        });
+        throw new ValidationError(1235,'Fail Unauthorised Access')
     }
 
 }
