@@ -1,30 +1,19 @@
 const userModel = require('../models/users.model')
-const responseModel = require('../models/response.model')
-const { encryptPassword, decryptPassword,getToken } = require('../utils/helpers')
+const { encryptPassword, decryptPassword, getToken } = require('../lib/helperFunctions')
 const ValidationError = require('../errors/validation.error')
+const ApplicationError = require('../errors/application.error')
 
 class UserController {
-    
+
     async getUser(_, { email }) {
         try {
-            const result = await userModel.getUser({ email })
-
-            return responseModel
-                .initialObject()
-                .setMessage('success')
-                .setData(result)
-                .getResponseObject()
-
+            return await userModel.getUser({ email })
         } catch (error) {
-            return responseModel
-                .initialObject()
-                .setStatus(false)
-                .setMessage(error.message)
-                .getResponseObject()
+            throw new ApplicationError(error)
         }
     }
 
-    async register(_, { name, email, password }) {
+    async register(_, { name, email, password,username }) {
         try {
 
             // encrypt password 
@@ -33,25 +22,18 @@ class UserController {
             const result = await userModel.createUser({
                 name,
                 email,
-                password
+                password,
+                username
             })
-            if (result) {
+            const token = getToken({ email: result.email })
 
-                const token = getToken({email: result.email})
-
-                return responseModel
-                    .initialObject()
-                    .setStatus(true)
-                    .setMessage('success')
-                    .setCustomValue('token', token)
-                    .getResponseObject()
+            return {
+                ...result,
+                token
             }
+
         } catch (error) {
-            return responseModel
-                .initialObject()
-                .setStatus(false)
-                .setMessage(error.message)
-                .getResponseObject()
+            throw new ApplicationError(error)
         }
     }
 
@@ -63,22 +45,16 @@ class UserController {
                 throw new ValidationError(1224, 'Fail Incorrect Password')
             }
 
-            const token = getToken({email: result.email})
+            const token = getToken({ email: result.email })
 
-            return responseModel
-                .initialObject()
-                .setStatus(true)
-                .setMessage('success')
-                .setCustomValue('token', token)
-                .getResponseObject()
+            return {
+                ...result,
+                token
+            }
 
 
         } catch (error) {
-            return responseModel
-                .initialObject()
-                .setStatus(false)
-                .setMessage(error.message)
-                .getResponseObject()
+            throw new ApplicationError(error)
         }
     }
 

@@ -1,32 +1,22 @@
 // dependencies
-const { GraphQLServer } = require('graphql-yoga')
+const { ApolloServer } = require('apollo-server');
 const typeDefs = require('./typeDefs')
 const resolvers = require('./resolvers')
 
-// config
+// server configuration 
 const PORT = process.env.PORT || 3000
-const options = { port: PORT }
 
-/* middleware */
-const checkAuth = require('./middlewares/checkauth.middleware')
-
-const permissions = {
-  Query: {
-    secured: checkAuth,
-  },
-  getUser: checkAuth,
+const options = {
+  port : PORT
 }
 
-
-
-const server = new GraphQLServer({
+const server = new ApolloServer({
   typeDefs,
-  resolvers,
-  context: req => ({ ...req }),
-  middleware: [permissions],
+  resolvers
 })
 
 /* SERVER STARTING */
-server
-  .start(options, () => console.log(`Server is running on localhost:${PORT}`))
-  .catch((error) => console.error('connection Error', error)) 
+server.listen(options).then(({ url }) => {
+  console.log(`🚀  Server ready at ${url}`);
+});
+

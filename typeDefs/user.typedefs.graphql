@@ -1,37 +1,26 @@
 type Query {
-  getUser(email:String!): UserResponse
+  getUser(email:String!): User
 }
 
 type Mutation  {
   register(
     name: String!
     email: String!
+    username: String!
     password: String!
-  ): LoginResponse
+  ): User
 
   login(
     email: String!
     password: String!
-  ): LoginResponse
+  ): User
 }
 
-
-type UserResponse {
-  status:Boolean
-  code:Int
-  message:String
-  data:User
-}
-
-type LoginResponse {
-  status:Boolean
-  code:Int
-  message:String
-  token: String
-}
 
 type User {
   id:Int
   name:String
   email:String
+  username:String
+  token:String
 }

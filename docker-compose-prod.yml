@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  mysql-graphql:
+    build:
+      context: .
+      args:
+        NODE_ENV: production
+    environment:
+      - NODE_ENV=development
+      - KNEX_CLIENT=$KNEX_CLIENT
+      - DB_HOST=$DB_HOST
+      - DB_PORT_MYSQL=$DB_PORT_MYSQL
+      - DB_USER_MYSQL=$DB_USER_MYSQL
+      - DB_PASSWORD_MYSQL=$DB_PASSWORD_MYSQL
+      - DB_DATABASE_MYSQL=$DB_DATABASE_MYSQL
+      - IS_PRODUCTION=1
+    command: npm run start

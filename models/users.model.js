@@ -1,4 +1,4 @@
-const db = require('../utils/db')
+const db = require('../lib/db')
 const DatabaseError = require('../errors/database.error')
 
 class UserModel {

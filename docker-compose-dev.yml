@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  app:
+    build:
+      context: .
+      args:
+        NODE_ENV: development
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
+      - KNEX_CLIENT=$KNEX_CLIENT
+      - DB_HOST=mysqldb
+      - DB_PORT_MYSQL=$DB_PORT_MYSQL
+      - DB_USER_MYSQL=$DB_USER_MYSQL
+      - DB_PASSWORD_MYSQL=$DB_PASSWORD_MYSQL
+      - DB_DATABASE_MYSQL=$DB_DATABASE_MYSQL
+      - IS_PRODUCTION=0
+    command: npm run dev
