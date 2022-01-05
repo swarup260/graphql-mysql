@@ -1,7 +1,7 @@
 // dependencies
 const { ApolloServer } = require('apollo-server');
-const typeDefs = require('./typeDefs')
-const resolvers = require('./resolvers')
+const typeDefs = require('./src/models/typeDefs')
+const resolvers = require('./src/resolvers')
 
 // server configuration 
 const PORT = process.env.PORT || 3000
