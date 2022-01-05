@@ -1,3 +1,4 @@
+require('dotenv').config()
 module.exports = {
   development: {
     client: process.env.KNEX_CLIENT,

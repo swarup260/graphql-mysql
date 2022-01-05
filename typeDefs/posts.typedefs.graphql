@@ -1,0 +1,36 @@
+type Post{
+  id:ID,
+  name:String,
+  body:String,
+  status:Boolean,
+  author:User
+}
+
+input PostInput{
+  name:String!,
+  body:String!,
+  status:Boolean
+}
+
+type PageInfo{
+    totalNo:Int
+  }
+
+type PostResult {
+  posts:[Post],
+  pageInfo: PageInfo
+}
+
+type Query {
+  getPost(id:ID!): Post
+  getPosts(limit:Int,offset:Int): PostResult
+  searchPosts(name:String,nameStartWith:String,nameEndWith:String,status:Boolean,limit:Int,offset:Int): PostResult
+}
+
+type Mutation  {
+  addPost(input:PostInput!):ID!
+  updatePost(id:ID!,input:PostInput!):ID!
+  deletePost(id:ID!):ID!
+}
+
+

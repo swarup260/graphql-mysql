@@ -1,17 +1,14 @@
-const ValidationError = require('../errors/validation.error');
-const { verifyToken,userExists } = require('../utils/helpers')
+const AuthenticationError = require("../errors/authentication.error");
+const { verifyToken,userExists } = require('../lib/helperFunctions')
 
 // eslint-disable-next-line no-unused-vars
-module.exports = async (resolve, parent, args, ctx, info) => {
+module.exports = async (authorization) => {
     try {
-        console.log(ctx);
-        const token =  ctx.request.get('Authorization').split(" ")[1]
+        const token =  authorization.split(" ")[1]
         const decoded = verifyToken(token);
-        const user = await userExists(decoded);
-        ctx.request.set('userData',user)
-        resolve();
+        return await userExists(decoded);
     } catch (error) {
-        throw new ValidationError(1235,'Fail Unauthorised Access')
+        throw new AuthenticationError(1235,'Fail Unauthorised Access')
     }
 
 }

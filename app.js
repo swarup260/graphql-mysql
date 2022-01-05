@@ -12,7 +12,13 @@ const options = {
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  context({ req }){
+    const token = req.headers.authorization
+    return {
+      token
+    }
+  }
 })
 
 /* SERVER STARTING */
