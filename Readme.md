@@ -1,3 +1,14 @@
+## Run Project Locally 
+
+```bash
+npm i #install package 
+
+npm run db:migrate #create tables in database 
+
+npm run dev #run project
+
+```
+
 ## Knex 
 [Migrations](https://knexjs.org/#Migrations)
 * Install Knex Globally 
@@ -22,6 +33,7 @@ knex migrate:rollback --all
 ```
 --- 
 ## Docker 
+### Development
 * inital build container and run in detach mode
 ```bash
 docker-compose  -f ./docker-compose.yml -f ./docker-compose-dev.yml up --build -d --remove-orphans 
@@ -35,6 +47,21 @@ docker-compose  -f ./docker-compose.yml -f ./docker-compose-dev.yml up -d
 * Kill runing instance
 ```bash
 docker-compose  -f ./docker-compose.yml -f ./docker-compose-dev.yml down -v 
+```
+### Production
+* inital build container and run in detach mode
+```bash
+docker-compose  -f ./docker-compose.yml -f ./docker-compose-prod.yml up --build -d --remove-orphans 
+```
+
+* Run in detach mode
+```bash
+docker-compose  -f ./docker-compose.yml -f ./docker-compose-prod.yml up -d 
+```
+
+* Kill runing instance
+```bash
+docker-compose  -f ./docker-compose.yml -f ./docker-compose-prod.yml down -v 
 ```
 
 --- 
